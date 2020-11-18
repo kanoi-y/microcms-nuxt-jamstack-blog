@@ -16,6 +16,7 @@
 
 <script>
 import axios from 'axios'
+import cheerio from 'cheerio'
 
 export default {
   async asyncData({ params }) {
