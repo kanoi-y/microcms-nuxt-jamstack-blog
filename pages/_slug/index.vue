@@ -18,20 +18,6 @@
 import axios from 'axios'
 
 export default {
-  created () {
-const $ = cheerio.load(body);
-const headings = $('h1, h2').toArray();
-  toc = headings.map(data => ({
-  text: data.children[0].data,
-  id: data.attribs.id,
-  name: data.name
-}));
-  },
-  data () {
-   return {
-     toc : []
-   }
-  },
   async asyncData({ params }) {
     const { data } = await axios.get(
       `https://jamstackblog.microcms.io/api/v1/blog/${params.slug}`,
@@ -39,7 +25,13 @@ const headings = $('h1, h2').toArray();
         headers: { 'X-API-KEY': 'ac4bdc72-42db-40aa-87ad-f41ca20e95e1' }
       }
     )
-    return data
+    const $ = cheerio.load(body);
+    const headings = $('h1, h2').toArray();
+    const toc = headings.map(data => ({
+  text: data.children[0].data,
+  id: data.attribs.id,
+  name: data.name}));
+    return {data, toc};
   }
 }
 </script>
