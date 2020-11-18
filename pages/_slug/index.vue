@@ -5,9 +5,7 @@
     <p class="category">{{ category && category.name }}</p>
 <ul class="lists">
   <li :class="`list ${item.name}`" v-for="item in toc" :key="item.id">
-   <n-link v-scroll-to="`#${item.id}`" to>
       {{ item.text }}
-    </n-link>
   </li>
 </ul>
     <div class="post" v-html="body"></div>
