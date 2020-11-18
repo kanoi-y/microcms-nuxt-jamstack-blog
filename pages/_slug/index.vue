@@ -3,6 +3,13 @@
     <h1 class="title">{{ title }}</h1>
     <p class="publishedAt">{{ publishedAt }}</p>
     <p class="category">{{ category && category.name }}</p>
+<ul class="lists">
+  <li :class="`list ${item.name}`" v-for="item in toc" :key="item.id">
+   <n-link v-scroll-to="`#${item.id}`" to>
+      {{ item.text }}
+    </n-link>
+  </li>
+</ul>
     <div class="post" v-html="body"></div>
   </main>
 </template>
@@ -11,6 +18,20 @@
 import axios from 'axios'
 
 export default {
+  created () {
+const $ = cheerio.load(body);
+const headings = $('h1, h2').toArray();
+  toc = headings.map(data => ({
+  text: data.children[0].data,
+  id: data.attribs.id,
+  name: data.name
+}));
+  },
+  data () {
+   return {
+     toc : []
+   }
+  },
   async asyncData({ params }) {
     const { data } = await axios.get(
       `https://jamstackblog.microcms.io/api/v1/blog/${params.slug}`,
