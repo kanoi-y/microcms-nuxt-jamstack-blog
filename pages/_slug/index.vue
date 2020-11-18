@@ -1,14 +1,14 @@
 <template>
   <main class="main">
-    <h1 class="title">{{ title }}</h1>
-    <p class="publishedAt">{{ publishedAt }}</p>
-    <p class="category">{{ category && category.name }}</p>
+    <h1 class="title">{{  data.title }}</h1>
+    <p class="publishedAt">{{ data.publishedAt }}</p>
+    <p class="category">{{ data.category && data.category.name }}</p>
 <ul class="lists">
   <li :class="`list ${item.name}`" v-for="item in toc" :key="item.id">
       {{ item.text }}
   </li>
 </ul>
-    <div class="post" v-html="body"></div>
+    <div class="post" v-html="data.body"></div>
   </main>
 </template>
 
