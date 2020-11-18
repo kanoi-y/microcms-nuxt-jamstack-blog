@@ -26,7 +26,7 @@ export default {
         headers: { 'X-API-KEY': 'ac4bdc72-42db-40aa-87ad-f41ca20e95e1' }
       }
     )
-    const $ = cheerio.load(body);
+    const $ = cheerio.load(data.body);
     const headings = $('h1, h2').toArray();
     const toc = headings.map(data => ({
   text: data.children[0].data,
