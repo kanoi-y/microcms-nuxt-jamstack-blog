@@ -43,10 +43,10 @@ export default {
           headers: { "X-API-KEY": "ac4bdc72-42db-40aa-87ad-f41ca20e95e1" }
         })
         .then(res =>
-          res.data.contents.map(content => ({
-            route: `/${content.id}`,
-            payload: content
-          })),
+          // res.data.contents.map(content => ({
+          //   route: `/${content.id}`,
+          //   payload: content
+          // }))
           range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
             route: `/page/${p}`,
           }))
